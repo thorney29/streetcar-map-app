@@ -17,6 +17,17 @@ function ListController($scope, $http, config){
         .then(function(response) {
 
             //this happens if everything works
+
+            var mapOptions = {
+                center: myLatlng100,
+                styles: config.googleMaps.styles,
+                zoom: 15,
+                draggable: false,
+                scrollwheel: false,
+                disableDoubleClickZoom: true,
+                zoomControl: false
+            };
+
             var map         = new google.maps.Map(document.getElementById('map'), mapOptions);
             var bounds      = new google.maps.LatLngBounds();
             var myLatlng100 = new google.maps.LatLng(45.523007, -122.657890);
@@ -28,15 +39,7 @@ function ListController($scope, $http, config){
 
             var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 
-            var mapOptions = {
-                center: myLatlng100,
-                styles: config.googleMaps.styles,
-                zoom: 15,
-                draggable: false,
-                scrollwheel: false,
-                disableDoubleClickZoom: true,
-                zoomControl: false
-            };
+
 
             directionsDisplay.setMap(map);
 
