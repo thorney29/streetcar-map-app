@@ -18,11 +18,16 @@ function ListController($scope, $http, config){
 
             //this happens if everything works
 
-            $scope.bars     = response.data;
-            $scope.markers  = [];
-
-            var bounds = new google.maps.LatLngBounds();
+            var bounds      = new google.maps.LatLngBounds();
             var myLatlng100 = new google.maps.LatLng(45.523007, -122.657890);
+            var infoWindow  = new google.maps.InfoWindow();
+            // Create a renderer for directions and bind it to the map.
+            var rendererOptions = {
+                map: $scope.map
+            };
+
+            var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+
             var mapOptions = {
                 center: myLatlng100,
                 styles: config.googleMaps.styles,
@@ -32,22 +37,9 @@ function ListController($scope, $http, config){
                 disableDoubleClickZoom: true,
                 zoomControl: false
             };
-            var infoWindow = new google.maps.InfoWindow();
-            // Create a renderer for directions and bind it to the map.
-            var rendererOptions = {
-                map: $scope.map
-            };
-            var directionsDisplay;
-            var directionsService;
-            directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-            $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            directionsDisplay.setMap($scope.map);
 
-            $scope.openInfoWindow = function(e, selectedMarker){
-                e.preventDefault();
-                google.maps.event.trigger(selectedMarker, 'click');
-            };
             var createMarker = function(bar){
+
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(bar.lat, bar.lng),
@@ -67,10 +59,12 @@ function ListController($scope, $http, config){
                     infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
                     infoWindow.open($scope.map, marker);
                 });
+
                 google.maps.event.addListener(marker, 'click', function(){
                     infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
                     infoWindow.open($scope.map, marker);
                 });
+
                 google.maps.event.addListener(marker, 'dragstart', function() {
                     disableMovement(true);
                 });
@@ -82,16 +76,30 @@ function ListController($scope, $http, config){
                 $scope.markers.push(marker);
             };
 
+
+            directionsDisplay.setMap($scope.map);
+
+            $scope.bars     = response.data;
+            $scope.markers  = [];
+            $scope.map      = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            $scope.openInfoWindow = function(e, selectedMarker){
+                e.preventDefault();
+                google.maps.event.trigger(selectedMarker, 'click');
+            };
+
             $scope.setAllMap = function(map) {
                 for (var i = 0; i < $scope.bars.length; i++){
                     createMarker($scope.bars[i]);
                 }
             }
+
             $scope.setAllMap(map);
 
             $scope.clearMarkers = function(map) {
                 setAllMap(null);
             }
+
             $(".hideit").on("click", function(map){
                 $scope.clearMarkers();
             });
