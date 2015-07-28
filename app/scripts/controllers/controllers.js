@@ -38,13 +38,11 @@ function ListController($scope, $http, config){
                 zoomControl: false
             };
 
-
             directionsDisplay.setMap(map);
 
             $scope.bars     = response.data;
             $scope.markers  = [];
             $scope.map      = map;
-
 
             $scope.openInfoWindow = function(e, selectedMarker){
                 e.preventDefault();
@@ -56,10 +54,6 @@ function ListController($scope, $http, config){
 
             setAllMap();
 
-            $(".hideit").on("click", function(map){
-                $scope.clearMarkers();
-            });
-
             $("#clearPanel").on("click", function(map){
                 document.getElementById("panel").innerHTML = " ";
                 $('h3.map').show();
@@ -67,7 +61,7 @@ function ListController($scope, $http, config){
             });
 
             console.log($scope.bars);
-            
+
             /*=======================================================
             | Functions Declarations
              ======================================================= */
