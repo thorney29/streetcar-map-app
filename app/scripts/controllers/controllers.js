@@ -82,6 +82,10 @@ function ListController($scope, $http, config){
             title: bar.name
         });
 
+        // TODO:
+        // All this needs to go into a template and probably
+        // you will need to create a directive
+
         marker.content =
             '<div class="contentString"><img src="' +
             bar.image +
