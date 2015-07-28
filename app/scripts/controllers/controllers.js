@@ -17,13 +17,13 @@ function ListController($scope, $http, config){
         .then(function(response) {
 
             //this happens if everything works
-
+            var map         = new google.maps.Map(document.getElementById('map'), mapOptions);
             var bounds      = new google.maps.LatLngBounds();
             var myLatlng100 = new google.maps.LatLng(45.523007, -122.657890);
             var infoWindow  = new google.maps.InfoWindow();
             // Create a renderer for directions and bind it to the map.
             var rendererOptions = {
-                map: $scope.map
+                map: map
             };
 
             var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
@@ -41,7 +41,7 @@ function ListController($scope, $http, config){
             var createMarker = function(bar){
 
                 var marker = new google.maps.Marker({
-                    map: $scope.map,
+                    map: map,
                     position: new google.maps.LatLng(bar.lat, bar.lng),
                     title: bar.name
                 });
@@ -57,12 +57,12 @@ function ListController($scope, $http, config){
 
                 google.maps.event.addListener(bar, 'click', function(){
                     infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
-                    infoWindow.open($scope.map, marker);
+                    infoWindow.open(map, marker);
                 });
 
                 google.maps.event.addListener(marker, 'click', function(){
                     infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
-                    infoWindow.open($scope.map, marker);
+                    infoWindow.open(map, marker);
                 });
 
                 google.maps.event.addListener(marker, 'dragstart', function() {
@@ -77,13 +77,14 @@ function ListController($scope, $http, config){
             };
 
 
-            directionsDisplay.setMap($scope.map);
+            directionsDisplay.setMap(map);
 
             $scope.bars     = response.data;
             $scope.markers  = [];
-            $scope.map      = new google.maps.Map(document.getElementById('map'), mapOptions);
+            $scope.map      = map;
 
-            $scope.openInfoWindow = function(e, selectedMarker){
+
+                $scope.openInfoWindow = function(e, selectedMarker){
                 e.preventDefault();
                 google.maps.event.trigger(selectedMarker, 'click');
             };
