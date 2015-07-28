@@ -18,26 +18,26 @@ function ListController($scope, $http, config){
 
             //this happens if everything works
 
-            var mapOptions = {
-                center: myLatlng100,
-                styles: config.googleMaps.styles,
-                zoom: 15,
-                draggable: false,
-                scrollwheel: false,
-                disableDoubleClickZoom: true,
-                zoomControl: false
-            };
+            var directionsDisplay, rendererOptions,
 
-            var map         = new google.maps.Map(document.getElementById('map'), mapOptions);
-            var bounds      = new google.maps.LatLngBounds();
-            var myLatlng100 = new google.maps.LatLng(45.523007, -122.657890);
-            var infoWindow  = new google.maps.InfoWindow();
+                mapOptions = {
+                    center: myLatlng100,
+                    styles: config.googleMaps.styles,
+                    zoom: 15,
+                    draggable: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true,
+                    zoomControl: false
+                },
+
+                map         = new google.maps.Map(document.getElementById('map'), mapOptions),
+                bounds      = new google.maps.LatLngBounds(),
+                myLatlng100 = new google.maps.LatLng(45.523007, -122.657890),
+                infoWindow  = new google.maps.InfoWindow();
+
             // Create a renderer for directions and bind it to the map.
-            var rendererOptions = {
-                map: map
-            };
-
-            var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+            rendererOptions     = { map: map };
+            directionsDisplay   = new google.maps.DirectionsRenderer(rendererOptions);
 
 
 
