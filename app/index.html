@@ -1,0 +1,232 @@
+<!doctype html>
+<html ng-app="mapApp" lang="en">
+  <head>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="utf-8">
+    <title>Map || Portland Streetcar Bars</title>
+    <meta name="description" content="Map of Portland's Eastside Streetcar Bars">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+ 
+<link rel="stylesheet" href="../../../styles/map-styles.css">
+<link rel="stylesheet" href="../../styles/mapAppStyles.css">
+<link type="text/css" rel="stylesheet" href="../../styles/waitMe.css"><!--  
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->  
+<script src="../../scripts/lib/modernizr-2.5.3.js"></script>
+<script src="../../scripts/modernizr.custom.js"></script>
+
+<script src="//use.typekit.net/kgp0loa.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+    <link rel="icon" 
+      type="image/png" 
+      href="http://portlandstreetcarbars.com/favicons/favicon.ico">
+ 
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+         <!--  Menu Header  -->
+  <section class="module parallax parallax-1-inner">
+    <div class="container">
+    <header>
+      <nav id="dl-menu" class="dl-menuwrapper">
+          <button class="dl-trigger">Open Menu</button>
+          <ul class="navMenu dl-menu">
+            <li><a class="hvr-shutter-out-horizontal" href="/">HOME</a></li>
+            <li><a class="hvr-shutter-out-horizontal" href="/streetcar-bars-list/">BAR LIST</a></li>
+            <li><a class="hvr-shutter-out-horizontal" id="current" href="#">MAP</a></li>
+            <li><a class="hvr-shutter-out-horizontal" href="/streetcar-bars-crawls/">CRAWLS</a></li>
+            <li><a class="hvr-shutter-out-horizontal" href="/streetcar-bars-join/">CONTACT</a></li>
+          </ul>
+      </nav>
+    <div class="clear"></div>
+    <div class="header-inner">Portland<span> Streetcar Bars</span></div>
+    <div class="inner-eastside-font-effect"><em>Eastside</em></div>
+    </header> 
+    </div>
+    </section>
+    <div class="clear"></div>
+      <section class="module parallax parallax-2">
+        <div class="container">
+         <h2>Get Directions to Your Next Stop</h2>
+         </div>
+    </section>  
+    <div ng-view=""></div> 
+  
+<div class="clear"></div>
+  <section class="module parallax parallax-2">
+        <div class="container">
+          <h2>Featured Stops on the Portland Streetcar</h2>
+         </div>
+    </section>  
+<section class="module content">
+  <div class="circle">
+   <h1 class="heading mainDark">Eastside Streetcar Bar Map</h1>
+      </div><hr>
+      <div class="container-flex">    
+      <figure class="card">
+        <div class="feature"><a href="#">Best Wine</a></div>
+        <figcaption class="caption">Here are our top three picks for best wine bars -- 
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </figcaption>
+      </figure>
+      <figure class="card">
+        <div class="feature"><a href="#">Best Beers</a></div>
+        <figcaption class="caption">Here are our top three picks for best beers and beer selections -- 
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>.</figcaption> 
+      </figure>
+     <figure class="card">
+        <div class="feature"><a href="#">Best HH</a></div>
+        <figcaption class="caption">Here are our top three picks for best happy -- 
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul></figcaption> 
+      </figure>
+     </div>
+ </section>
+           
+           <!-- Footer  -->
+ <div class="clear"></div>
+ <section class="module parallax parallax-3">
+  <h2>FUN! FAST! EASY!</h2>
+        <footer id="figureThree" class="container">
+           <figure class="card"> 
+            <h6>Site Mantained by <a href="http://moderncultivator.com">Modern Cultivator</a> </h6>
+          </figure>
+        <figure class="card">
+          <img class="image-icons" src="../../images/green_drink_mug.png" alt="mug of love icon">
+        </figure> 
+        <figure class="card">
+         <h6> <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=tresa.e@gmail.com&amp;Subject = I'd like to know more" target="_blank"> Email the Portland Streetcar Bars</a></h6>
+         </figure>
+        </footer>     
+ </section>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+   <script>
+    //    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    //    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    //    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    //    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    //    ga('create', 'UA-XXXXX-X');
+    //    ga('send', 'pageview');
+     </script>
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCdOS0Bctn6co9d2ZaecN-LNrU5yi3eoXQ&sensor=true&libraries=places,drawing,geometry"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-map/ui-map.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+   <script src="scripts/app.js"></script>
+   <script src="scripts/controllers/controllers.js"></script>      
+   <script src="scripts/directives/directives.js"></script> 
+
+        <!-- endbuild -->
+ 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="../../scripts/waitMe.js"></script> 
+<script src="../../scripts/jquery.dlmenu.js"></script>
+
+<script>
+      $(function(){
+          var url = window.location.href; 
+          $(".navMenu a").each(function() {
+              if(url == (this.href)) { 
+                  $(this).closest("a").addClass("current");
+              }
+          });
+      });
+      (function(){
+          var parallax = document.querySelectorAll(".parallax"),
+            speed = 0.35;
+        window.onscroll = function(){
+            [].slice.call(parallax).forEach(function(el,i){
+              var windowYOffset = window.pageYOffset,
+                elBackgrounPos = "0 " + (windowYOffset * speed) + "px";  
+              el.style.backgroundPosition = elBackgrounPos;
+          });
+        };
+      })();
+      $(function(){
+        // none, bounce, rotateplane, stretch, orbit, 
+        // roundBounce, win8, win8_linear or ios
+        var current_effect = 'bounce'; // 
+        function run_waitMe(effect){
+        $('#spinHere').waitMe({
+          //none, rotateplane, stretch, orbit, roundBounce, win8, 
+          //win8_linear, ios, facebook, rotation, timer, pulse, 
+          //progressBar, bouncePulse or img
+          effect: 'bounce',
+
+          //place text under the effect (string).
+          text: 'Getting Directions',
+
+          //background for container (string).
+          bg: 'rgba(255,255,255,0.7)',
+
+          //color for background animation and text (string).
+          color: '#000',
+
+          //change width for elem animation (string).
+          sizeW: '',
+
+          //change height for elem animation (string).
+          sizeH: '',
+
+          // url to image
+          source: ''
+           
+          });
+        }  
+      });
+
+      $(function() {
+        $( '#dl-menu' ).dlmenu({
+          animationClasses : { classin : 'dl-animate-in-3', classout : 'dl-animate-out-3' }
+        });
+      });
+    </script>
+</body>
+</html>

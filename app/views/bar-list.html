@@ -1,0 +1,32 @@
+<div class="row marketing">
+     
+      <!-- List-Container Section  -->
+      <section class="">          
+        <div class="horizontal">
+          <div class="table"> 
+            <article ng-repeat='bar in bars track by $index'>
+              
+              <!-- List-Group_Box contains data fetched - each bar object with title and image-->  
+              <h3 class="box-title" id="barName">{{bar.name}}</h3>
+
+               <!-- Image Gallery  -->
+              <div class="img-wrap">
+                <img id="bar-image" ng-src="{{bar.image}}" />
+               <!-- End Image Gallery  -->
+              </div>
+                    
+            </article>
+          <!-- Repeat this part as many times as necessary. -->
+         </div>
+        </div>
+          <ul class="contentBox hide">
+                <li id="bar-lat"> {{bar.address}}</li>
+                <li id="bar-lng"> {{bar.url}}</li>
+<!--            <li><div id="log">  {{bar.contentString}}  </div></li>
+ -->
+         </ul>
+     </section>
+     
+   <div class="clear"></div>
+ 
+</div>

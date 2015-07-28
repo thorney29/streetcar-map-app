@@ -1,0 +1,124 @@
+./*html { width: 100%;height: 100% }
+body { width: 100%;height: 100%; margin: 0; padding: 0 }*/
+.contentString { 
+    margin: 0 auto; 
+    display: block; 
+    padding: 0; padding-bottom: 16px; 
+    width: 100%; 
+    height: 100%; 
+    line-height: 100%; 
+    overflow: hidden;
+}
+.contentString p {margin-top: -20px;}
+.contentString h3 {
+    font-size: 1.4em;
+    text-align: left;
+    margin-top: -15px;
+    width:81%;
+    margin-left: 2px;
+}
+.contentString img {
+     margin-left: 4px;
+     background-size: cover; 
+     width: 74%; 
+     height: 100%;
+     padding-top: 10px;
+ }
+ 
+h3.map{ 
+    margin-top: 0px;
+}
+
+.list-container {height: auto;}
+.list-group-container {
+   width: 100%;
+    margin: 20px 0 20px 0;    
+    display: inline-block; 
+    height: 230px;
+    padding: 15px 0 0 0;
+    background: rgba(0,0,0,.86);
+    margin: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border: 1px solid #999;   
+    -moz-box-shadow:     0 0 10px #000000;
+    -webkit-box-shadow:  0 0 10px #000000;
+     box-shadow:         0 0 10px #000000;    
+}  
+/*.post { 
+    max-width: 100%;
+    margin: 20px 0 20px 0;    
+    display: inline-block; 
+    -moz-box-shadow:     0 0 10px #000000;
+    -webkit-box-shadow:  0 0 10px #000000;
+     box-shadow:         0 0 10px #000000; 
+}
+*/
+ 
+.list-group_box{
+    border: solid red 1px;    
+    width:  131px;
+    height: 180px;
+    float: left;
+    margin: 0 2px;
+    padding:  0 2px;
+     -moz-box-shadow:   inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+     box-shadow:        inset 0 0 10px #000000;    
+     display: inline-block; 
+
+}
+h3.box-title {
+    text-align: center;
+    color: white;
+    font-size: 11px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: -10px;
+    vertical-align: middle;
+}
+h3.box-title a {text-decoration: none;}
+ 
+.map-container {
+    max-width: 100%;
+    height: 100%;
+ }
+#map-canvas, 
+#mapLayout { 
+    width: 75%;
+    height: 800px;
+    float: left; 
+    position: relative;
+ }  
+aside {
+    width: 25%;
+    float: right;
+} 
+#panel {
+    width: 100%;
+    padding: 10px 20px;
+ }
+/*#reset-map {
+    width:100%;
+    position: relative;
+    padding: 12px 20px;
+    background: rgb(188,222,25);
+    font-family: "continuo";      
+    font-size: 18px;
+    color: rgb(33,36,38);
+    margin-top: -1px;
+} */
+#reset-map {
+ 
+    background:   rgb(140,21,9);
+    color: white;
+    font-family: "aw-conqueror-inline", sans-serif;
+    width:100%;
+    text-align: left;
+    
+ text-align: center;
+ border-left: none;
+ border-right: none;
+ margin-top: .5px;
+
+}
