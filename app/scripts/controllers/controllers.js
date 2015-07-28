@@ -7,7 +7,7 @@
  * Controller of the mapApp
  */
  //Data
-var markers = [];
+
 var mapApp = angular.module('mapControllers', []);
 
 function ListController($scope, $http, config){
@@ -16,7 +16,7 @@ function ListController($scope, $http, config){
         .get('scripts/bars.json')
         .then(handleSuccessResponse)
         .catch(handleErrorResponse);
-    
+
     return;
     ////////////////////////////////////////////////////////////
 
