@@ -46,14 +46,10 @@ function ListController($scope, $http, config){
             $scope.markers  = [];
             $scope.map      = map;
 
-            $scope.openInfoWindow = function(e, selectedMarker){
-                e.preventDefault();
-                google.maps.event.trigger(selectedMarker, 'click');
-            };
-
-            $scope.setAllMap    = setAllMap;
-            $scope.clearMarkers = clearMarkers;
-            $scope.clearPanel   = clearPanel;
+            $scope.openInfoWindow   = openInfoWindow;
+            $scope.setAllMap        = setAllMap;
+            $scope.clearMarkers     = clearMarkers;
+            $scope.clearPanel       = clearPanel;
 
             setAllMap();
 
@@ -109,6 +105,11 @@ function ListController($scope, $http, config){
                 $scope.markers.push(marker);
 
             }
+
+            function openInfoWindow(e, selectedMarker){
+                e.preventDefault();
+                google.maps.event.trigger(selectedMarker, 'click');
+            };
 
             function setAllMap(){
                 for (var i = 0; i < $scope.bars.length; i++){
