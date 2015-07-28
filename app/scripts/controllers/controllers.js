@@ -12,11 +12,15 @@ var mapApp = angular.module('mapControllers', []);
 
 function ListController($scope, $http, config){
 
-    $http.get('scripts/bars.json').
-        success(function(data, status, headers, config) {
+    $http
+        .get('scripts/bars.json')
+        .then(function(response) {
+
             //this happens if everything works
-            $scope.bars = data;
-            $scope.markers = [];
+
+            $scope.bars     = response.data;
+            $scope.markers  = [];
+
             var bounds = new google.maps.LatLngBounds();
             var myLatlng100 = new google.maps.LatLng(45.523007, -122.657890);
             var mapOptions = {
@@ -100,8 +104,8 @@ function ListController($scope, $http, config){
 
             console.log($scope.bars);
         }).
-        error(function(data, status, headers, config) {
-            console.log("Did not compute");
+        catch(function(error) {
+            console.log("Error fetching bars: ", error);
         });
 }
 
