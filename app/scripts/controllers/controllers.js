@@ -39,8 +39,6 @@ function ListController($scope, $http, config){
             rendererOptions     = { map: map };
             directionsDisplay   = new google.maps.DirectionsRenderer(rendererOptions);
 
-
-
             directionsDisplay.setMap(map);
 
             $scope.bars     = response.data;
@@ -54,20 +52,21 @@ function ListController($scope, $http, config){
 
             $scope.setAllMap    = setAllMap;
             $scope.clearMarkers = clearMarkers;
+            $scope.clearPanel   = clearPanel;
 
             setAllMap();
-
-            $("#clearPanel").on("click", function(map){
-                document.getElementById("panel").innerHTML = " ";
-                $('h3.map').show();
-                $('#clearPanel').hide();
-            });
 
             console.log($scope.bars);
 
             /*=======================================================
             | Functions Declarations
              ======================================================= */
+
+            function clearPanel(){
+                document.getElementById("panel").innerHTML = " ";
+                $('h3.map').show();
+                $('#clearPanel').hide();
+            }
 
             function createMarker(bar){
 
