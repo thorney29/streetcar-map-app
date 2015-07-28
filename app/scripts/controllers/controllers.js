@@ -8,7 +8,9 @@
  */
  //Data
 
-var mapApp = angular.module('mapControllers', []);
+angular
+    .module('mapControllers', [])
+    .controller('ListController', ListController);
 
 function ListController($scope, $http, config){
 
@@ -134,7 +136,6 @@ function ListController($scope, $http, config){
 
 }
 
-mapApp.controller('ListController', ListController);
 
 function disableMovement(disable) {
     var mapOptions;
@@ -155,7 +156,6 @@ function disableMovement(disable) {
     }
     map.setOptions(mapOptions);
 }
-
 
 function getDir(lat,lng,markers,map) {
     run_waitMe();
