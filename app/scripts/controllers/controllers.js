@@ -38,7 +38,41 @@ function ListController($scope, $http, config){
                 zoomControl: false
             };
 
-            var createMarker = function(bar){
+
+            directionsDisplay.setMap(map);
+
+            $scope.bars     = response.data;
+            $scope.markers  = [];
+            $scope.map      = map;
+
+
+            $scope.openInfoWindow = function(e, selectedMarker){
+                e.preventDefault();
+                google.maps.event.trigger(selectedMarker, 'click');
+            };
+
+            $scope.setAllMap    = setAllMap;
+            $scope.clearMarkers = clearMarkers;
+
+            setAllMap();
+
+            $(".hideit").on("click", function(map){
+                $scope.clearMarkers();
+            });
+
+            $("#clearPanel").on("click", function(map){
+                document.getElementById("panel").innerHTML = " ";
+                $('h3.map').show();
+                $('#clearPanel').hide();
+            });
+
+            console.log($scope.bars);
+            
+            /*=======================================================
+            | Functions Declarations
+             ======================================================= */
+
+            function createMarker(bar){
 
                 var marker = new google.maps.Marker({
                     map: map,
@@ -46,13 +80,15 @@ function ListController($scope, $http, config){
                     title: bar.name
                 });
 
-                marker.content = '<div class="contentString"><img src="' +
-                bar.image +
-                '"><br/>'+
-                bar.address +
-                ' ' +
-                '<br /><button id="spinner" class="button" onclick="getDir('+bar.lat+', '+bar.lng+')">Get Directions</button>' +
-                '</div>';
+                marker.content =
+                    '<div class="contentString"><img src="' +
+                            bar.image +
+                        '"><br/>'+
+                            bar.address +
+                        ' ' +
+                        '<br /><button id="spinner" class="button" onclick="getDir('+bar.lat+', '+bar.lng+')">Get Directions</button>' +
+                    '</div>';
+
                 marker.image = bar.image;
 
                 google.maps.event.addListener(bar, 'click', function(){
@@ -74,44 +110,23 @@ function ListController($scope, $http, config){
                 });
 
                 $scope.markers.push(marker);
-            };
 
+            }
 
-            directionsDisplay.setMap(map);
-
-            $scope.bars     = response.data;
-            $scope.markers  = [];
-            $scope.map      = map;
-
-
-                $scope.openInfoWindow = function(e, selectedMarker){
-                e.preventDefault();
-                google.maps.event.trigger(selectedMarker, 'click');
-            };
-
-            $scope.setAllMap = function(map) {
+            function setAllMap(){
                 for (var i = 0; i < $scope.bars.length; i++){
                     createMarker($scope.bars[i]);
                 }
             }
 
-            $scope.setAllMap(map);
-
-            $scope.clearMarkers = function(map) {
+            function clearMarkers(){
+                // null has not purpose here
+                // as setAllMap doesn't ever us
+                // any arguments
                 setAllMap(null);
             }
 
-            $(".hideit").on("click", function(map){
-                $scope.clearMarkers();
-            });
 
-            $("#clearPanel").on("click", function(map){
-                document.getElementById("panel").innerHTML = " ";
-                $('h3.map').show();
-                $('#clearPanel').hide();
-            });
-
-            console.log($scope.bars);
         }).
         catch(function(error) {
             console.log("Error fetching bars: ", error);
