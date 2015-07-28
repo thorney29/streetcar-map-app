@@ -12,6 +12,8 @@ angular
     .module('mapControllers', [])
     .controller('ListController', ListController);
 
+ListController.$inject = ['$scope', '$http', 'config'];
+
 function ListController($scope, $http, config){
 
     $http
