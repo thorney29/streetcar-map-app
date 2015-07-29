@@ -7,101 +7,141 @@
  * Controller of the mapApp
  */
  //Data
-var markers = [];
-var mapApp = angular.module('mapControllers', []);
-mapApp.controller('ListController', function ($scope, $http) {
-   $http.get('scripts/bars.json').
-    success(function(data, status, headers, config) {
-        //this happens if everything works
-        $scope.bars = data;
-        $scope.markers = [];
-        var bounds = new google.maps.LatLngBounds();
-        var myLatlng100 = new google.maps.LatLng(45.523007, -122.657890);
-        var mapOptions = {
+
+angular
+    .module('mapControllers', [])
+    .controller('ListController', ListController);
+
+ListController.$inject = ['$scope', '$http', 'config'];
+
+function ListController($scope, $http, config){
+
+    $http
+        .get('scripts/bars.json')
+        .then(handleSuccessResponse)
+        .catch(handleErrorResponse);
+
+    return;
+    ////////////////////////////////////////////////////////////
+
+    function handleErrorResponse(error){
+        console.log("Error fetching bars: ", error);
+    }
+
+    function handleSuccessResponse(response){
+
+        var directionsDisplay, rendererOptions, map,
+
+            myLatlng100 = new google.maps.LatLng(45.523007, -122.657890),
+            bounds      = new google.maps.LatLngBounds(),
+            infoWindow  = new google.maps.InfoWindow(),
+
+            mapOptions = {
                 center: myLatlng100,
-                styles: [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}],
+                styles: config.googleMaps.styles,
                 zoom: 15,
                 draggable: false,
                 scrollwheel: false,
                 disableDoubleClickZoom: true,
-                zoomControl: false             
-        };
-        var infoWindow = new google.maps.InfoWindow();
-         // Create a renderer for directions and bind it to the map.
-        var rendererOptions = {
-                map: $scope.map
-        };
-        var directionsDisplay;
-        var directionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        directionsDisplay.setMap($scope.map);
-       
-        $scope.openInfoWindow = function(e, selectedMarker){
-            e.preventDefault();
-            google.maps.event.trigger(selectedMarker, 'click');
-        }; 
-        var createMarker = function(bar){
-            var marker = new google.maps.Marker({
-                map: $scope.map,
-                position: new google.maps.LatLng(bar.lat, bar.lng),
-                title: bar.name
-            });
-   
-            marker.content = '<div class="contentString"><img src="' + 
+                zoomControl: false
+            };
+
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        // Create a renderer for directions and bind it to the map.
+        rendererOptions     = { map: map };
+        directionsDisplay   = new google.maps.DirectionsRenderer(rendererOptions);
+
+        directionsDisplay.setMap(map);
+
+        $scope.bars     = response.data;
+        $scope.markers  = [];
+        $scope.map      = map;
+
+        $scope.openInfoWindow   = openInfoWindow;
+        $scope.setAllMap        = setAllMap;
+        $scope.clearMarkers     = clearMarkers;
+        $scope.clearPanel       = clearPanel;
+
+        setAllMap();
+
+        console.log($scope.bars);
+    }
+
+    function clearPanel(){
+        document.getElementById("panel").innerHTML = " ";
+        $('h3.map').show();
+        $('#clearPanel').hide();
+    }
+
+    function createMarker(bar){
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(bar.lat, bar.lng),
+            title: bar.name
+        });
+
+        // TODO:
+        // All this needs to go into a template and probably
+        // you will need to create a directive
+
+        marker.content =
+            '<div class="contentString"><img src="' +
             bar.image +
-            '"><br/>'+ 
+            '"><br/>'+
             bar.address +
-            ' ' +  
+            ' ' +
             '<br /><button id="spinner" class="button" onclick="getDir('+bar.lat+', '+bar.lng+')">Get Directions</button>' +
             '</div>';
-            marker.image = bar.image;
-              
-            google.maps.event.addListener(bar, 'click', function(){
-                infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
-                infoWindow.open($scope.map, marker);
-            });
-              google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
-                infoWindow.open($scope.map, marker);
-            });
-            google.maps.event.addListener(marker, 'dragstart', function() {
-                disableMovement(true);
-            });
 
-            google.maps.event.addListener(marker, 'dragend', function() {
-                disableMovement(false);
-            });         
-       
-            $scope.markers.push(marker);
-         };  
-        
-        $scope.setAllMap = function(map) {
-            for (var i = 0; i < $scope.bars.length; i++){
-              createMarker($scope.bars[i]);
-            }  
+        marker.image = bar.image;
+
+        google.maps.event.addListener(bar, 'click', function(){
+            infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
+            infoWindow.open(map, marker);
+        });
+
+        google.maps.event.addListener(marker, 'click', function(){
+            infoWindow.setContent('<a class="info-window" href="' + bar.url + '">' +'<h3 class="info-window" >' + bar.name + '</h3>' + '</a>' +  marker.content);
+            infoWindow.open(map, marker);
+        });
+
+        google.maps.event.addListener(marker, 'dragstart', function() {
+            disableMovement(true);
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function() {
+            disableMovement(false);
+        });
+
+        $scope.markers.push(marker);
+
+    }
+
+    function openInfoWindow(e, selectedMarker){
+        e.preventDefault();
+        google.maps.event.trigger(selectedMarker, 'click');
+    };
+
+    function setAllMap(){
+        for (var i = 0; i < $scope.bars.length; i++){
+            createMarker($scope.bars[i]);
         }
-        $scope.setAllMap(map); 
+    }
 
-        $scope.clearMarkers = function(map) {
-            setAllMap(null);
-         }
-        $(".hideit").on("click", function(map){
-               $scope.clearMarkers(); 
-           });
+    function clearMarkers(){
+        // null has not purpose here
+        // as setAllMap doesn't ever us
+        // any arguments
+        // setAllMap(null);
 
-        $("#clearPanel").on("click", function(map){
-                document.getElementById("panel").innerHTML = " ";
-                $('h3.map').show();
-                $('#clearPanel').hide();
-          });
-        
-  console.log($scope.bars);
-    }).
-    error(function(data, status, headers, config) {
-      console.log("Did not compute");
-    });
-});   
+        // maybe try reseting the markers array
+        $scope.markers = [];
+    }
+
+}
+
 
 function disableMovement(disable) {
     var mapOptions;
@@ -122,7 +162,6 @@ function disableMovement(disable) {
     }
     map.setOptions(mapOptions);
 }
-
 
 function getDir(lat,lng,markers,map) {
     run_waitMe();
